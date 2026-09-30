@@ -1,0 +1,68 @@
+# I used this website to build this diagram
+#https://app.quickdatabasediagrams.com/#/
+
+# Modify this code to update the DB schema diagram.
+# To reset the sample schema, replace everything with
+# two dots ('..' - without quotes).
+
+Customer
+-
+ID int pk
+Name nvarchar(50)
+ContactInfo nvarchar(50)
+LicenseNumber nvarchar(100)
+
+Vehicle
+-
+ID int pk
+VehicleFuelTypeID int fk >0- FuelType.ID
+Make nvarchar(50)
+Year smallint
+Model nvarchar(50)
+Mileage int
+RentalRates money
+PlateNumber nvarchar(50)
+#VehicleCategoryID int fk >0- VehicleCategory.ID
+
+VehicleCategory
+-
+ID int pk
+VehicleID int fk >- Vehicle.ID
+CategoryID int fk >0- Category.ID
+
+Booking
+-
+ID int pk
+VehicleID int fk >0- Vehicle.ID
+CustomerID int fk >0- Customer.ID
+PaymentID int fk - Payment.ID
+StartDate date
+EndDate date
+PickupLocation nvarchar(100)
+DropOfLocation nvarchar(100)
+InitialRentalDays int
+InitialTotalDueAmount money
+InitialVehicleCheckNotes nvarchar(100)
+ActualReturnDate date
+ActualRentalDays int
+AdditionalCharges money
+FinalVehicleCheckNotes nvarchar(100)
+ConsumedMileage int
+CurrentMileage int
+
+Payment
+-
+ID int pk
+InitialPaidAmount money
+ActualPaidAmount money
+RemainingAmount
+
+FuelType
+-
+ID int pk
+Name nvarchar(50)
+
+Category
+-
+ID int pk
+Name nvarchar(50)
